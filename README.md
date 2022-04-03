@@ -10,10 +10,11 @@ A Flask api template
 - Update `app.utilities.AppConfig` class with any extra keys added to env file.
 
 ### Running migrations
-After cloning the project, you need to apply migrations. This is only for test purposes. Delete the `./migrations` folder when transitioning to your own project.
 [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is used to manage database migrations.
+
 Start by installing dependencies with `make install-deps`.
-If migrations folder is not present, this will initialize and create the folder.
+
+Initialize migrations. This will create a `./migrations/` folder.
 ```
 make init-migrations
 ```
@@ -54,15 +55,38 @@ On start, one test endpoint will be available.
 curl --location --request POST 'http://127.0.0.1:8000/hello' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "name": "Teapot"
+    "name": "Habari",
+    "language: "Swahili"
 }'
 ```
-Response: `{"message": "Hello Teapot!"}`
+Response:
+```
+{
+    "greeting": {
+        "id": 1,
+        "language": "Swahili",
+        "name": "Habari"
+    },
+    "message": "Successfully added new greeting"
+}
+```
 
 ```
 curl --location --request GET 'http://127.0.0.1:8000/hello'
 ```
-Response: `{"message": "Hello"}`
+Response:
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "language": "Swahili",
+            "name": "Habari"
+        }
+    ],
+    "message": "Success"
+}
+```
 
 ### Running Tests
 Run unit and integration tests with:
