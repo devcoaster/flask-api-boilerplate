@@ -16,8 +16,19 @@ run-dev:
 
 .PHONY: format
 format:
-	. $(ACTIVATE_VENV) && python -m black app/ ; . $(ACTIVATE_VENV) && python -m black server.py
+	. $(ACTIVATE_VENV) && python -m black .
 
 .PHONY: format-check
 format-check:
-	. $(ACTIVATE_VENV) && python -m black app/ --check ; . $(ACTIVATE_VENV) && python -m black server.py --check
+	. $(ACTIVATE_VENV) && python -m black . --check
+
+.PHONY: run-tests
+run-tests: unit-test int-test
+
+.PHONY: unit-test
+unit-test:
+	. $(ACTIVATE_VENV) && python -m unittest discover tests/unit
+
+.PHONY: int-test
+int-test: 
+	. $(ACTIVATE_VENV)  && python -m unittest discover tests/integration
