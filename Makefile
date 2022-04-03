@@ -10,6 +10,18 @@ create-venv:
 install-deps: create-venv
 	. $(ACTIVATE_VENV) && pip install -r requirements.txt
 
+.PHONY: init-migrations
+init-migrations:
+	. $(ACTIVATE_VENV) && FLASK_APP=server.py flask db init
+
+.PHONY: migrate
+migrate:
+	. $(ACTIVATE_VENV) && FLASK_APP=server.py flask db migrate
+
+.PHONY: upgrade
+upgrade:
+	. $(ACTIVATE_VENV) && FLASK_APP=server.py flask db upgrade
+
 .PHONY: run
 run:
 	docker-compose -f docker-compose.yml up --build -d

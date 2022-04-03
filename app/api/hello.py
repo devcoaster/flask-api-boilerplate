@@ -3,6 +3,7 @@ Sample method view.
 """
 from flask import Response, jsonify, request
 from app.api.base import BaseMethodView
+from app.models import Greeting
 
 
 class Hello(BaseMethodView):

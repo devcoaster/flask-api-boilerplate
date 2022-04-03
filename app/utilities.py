@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 @dataclass
 class AppConfig:
+    SQLALCHEMY_DATABASE_URI: str
     DEBUG: bool = False
 
     def __post_init__(self) -> None:

@@ -6,8 +6,27 @@ A Flask api template
 2. Code is tested on >=python3.9 and MacOS environment. Windows environments or lower python versions will need some tweaking.
 
 ### Configuration
-- Add your app configuration to the root of the project as a `.env` file. If using a different env file name, update server.py.
+- Add your app configuration to the root of the project as a `.env` file. If using a different env file name, update server.py. You MUST provide `SQLALCHEMY_DATABASE_URI` string in the `.env` file. A convenient service I use for test postgresql databases is [ElephantSQL](https://www.elephantsql.com/). On creating a free db instance you will get a database uri that you can copy into your env file.
 - Update `app.utilities.AppConfig` class with any extra keys added to env file.
+
+### Running migrations
+After cloning the project, you need to apply migrations. This is only for test purposes. Delete the `./migrations` folder when transitioning to your own project.
+[Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/) is used to manage database migrations.
+Start by installing dependencies with `make install-deps`.
+If migrations folder is not present, this will initialize and create the folder.
+```
+make init-migrations
+```
+After making changes to `models.py`, track those changes with:
+```
+make migrate
+```
+Finally apply migrations to database with:
+```
+make upgrade
+```
+The commands above are just a thin wrapper around flask migrate cli commands.
+
 
 ### Running the app
 Install dependencies. This will also create a virtualenvironment if none exists.  
