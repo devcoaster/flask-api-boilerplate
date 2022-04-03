@@ -1,4 +1,4 @@
-# flask-api-boilerplate
+# Flask API Boilerplate
 A Flask api template
 
 ### Summary
@@ -20,6 +20,13 @@ Run with make.
 make run-dev
 ```  
 
+### Running Tests
+Run unit and integration tests with:
+```
+make run-tests
+```
+
+Alternatively, you can run each separately with `make unit-test` and `make int-test`.
 
 ### Code Formatting
 This project uses the [black](https://black.readthedocs.io/en/stable/) code formatter with the default configuration.
