@@ -6,6 +6,8 @@ A Flask api template
 2. Code is tested on >=python3.9 and MacOS environment. Windows environments or lower python versions will need some tweaking.
 
 ### Configuration
+- Add your app configuration to the root of the project as a `.env` file. If using a different env file name, update server.py.
+- Update `app.utilities.AppConfig` class with any extra keys added to env file.
 
 ### Running the app
 Install dependencies. This will also create a virtualenvironment if none exists.  
