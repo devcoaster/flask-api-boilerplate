@@ -6,4 +6,6 @@ services:
       context: ./
     ports:
       - "8000:8000"
+    volumes:
+      - ./.env:/usr/src/.env
     command: gunicorn server:app --bind 0.0.0.0:8000

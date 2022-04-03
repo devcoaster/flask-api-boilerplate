@@ -28,13 +28,16 @@ class Hello(BaseMethodView):
         name = req_payload.get("name")
         language = req_payload.get("language")
         if not language or not name:
-            return jsonify({"error": f"Missing name or language"})
+            return jsonify({"error": f"Missing name or language"}), 400
 
         exist_check = Greeting.query.filter(
             (Greeting.name == name) | (Greeting.language == language)
         ).first()
         if exist_check:
-            return jsonify({"error": f"{language} greeting {name} already exists!"})
+            return (
+                jsonify({"error": f"{language} greeting {name} already exists!"}),
+                400,
+            )
 
         new_greeting = Greeting(name=str(name), language=str(language))
         db.session.add(new_greeting)

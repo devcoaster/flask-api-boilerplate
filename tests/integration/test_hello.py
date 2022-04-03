@@ -11,26 +11,38 @@ class TestHello(IntegrationBaseTest):
 
     def test_get(self) -> None:
         """
-        Get request to hello should return successful response.
+        GET request should retrieve greetings in the database.
         """
         resp = self.test_client.get("/hello")
 
         resp_json = resp.get_json()
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp_json, {"message": "Hello"})
+        self.assertEqual(resp_json, {"message": "Success", "data": []})
 
     def test_post(self) -> None:
         """
-        Post request with a name returns the name as part of greeting.
+        Post request with valid greeting should save new entry.
         """
-        test_cases = [
-            ("Name present in json payload", {"name": "teapot"}, "Hello teapot!"),
-            ("Name not in json payload", {}, "Hello anonymous!"),
-        ]
+        payload = {"name": "Habari", "language": "Swahili"}
+        resp = self.test_client.post("/hello", json=payload)
 
-        for _, payload, expected_resp in test_cases:
-            resp = self.test_client.post("/hello", json=payload)
+        resp_json = resp.get_json()
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            resp_json,
+            {
+                "message": "Successfully added new greeting",
+                "greeting": {"id": 1, "name": "Habari", "language": "Swahili"},
+            },
+        )
 
-            resp_json = resp.get_json()
-            self.assertEqual(resp.status_code, 200)
-            self.assertEqual(resp_json, {"message": expected_resp})
+    def test_post_validations(self) -> None:
+        """
+        If fields are missing, response should be an error.
+        """
+        payload = {"name": "Habari"}
+        resp = self.test_client.post("/hello", json=payload)
+
+        resp_json = resp.get_json()
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp_json, {"error": "Missing name or language"})
