@@ -4,7 +4,7 @@ run-dev:
 
 .PHONY: format
 format:
-	black app/ black server.py
+	python -m black app/ ; python -m black server.py
 
 .PHONY: format-check
 format-check:
