@@ -10,6 +10,14 @@ create-venv:
 install-deps: create-venv
 	. $(ACTIVATE_VENV) && pip install -r requirements.txt
 
+.PHONY: run
+run:
+	docker-compose -f docker-compose.yml up --build -d
+
+.PHONY: stop
+stop:
+	docker-compose -f docker-compose.yml stop
+
 .PHONY: run-dev
 run-dev:
 	. $(ACTIVATE_VENV) && FLASK_APP=server.py flask run

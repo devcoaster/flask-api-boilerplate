@@ -18,7 +18,32 @@ make install-deps
 Run with make.
 ```
 make run-dev
-```  
+```
+
+Alternatively, you can run  the app with docker. This command will invoke docker-compose.
+```
+make run
+```
+
+Stop the containers running in the background with:
+```
+make stop
+```
+
+On start, one test endpoint will be available.
+```
+curl --location --request POST 'http://127.0.0.1:8000/hello' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Teapot"
+}'
+```
+Response: `{"message": "Hello Teapot!"}`
+
+```
+curl --location --request GET 'http://127.0.0.1:8000/hello'
+```
+Response: `{"message": "Hello"}`
 
 ### Running Tests
 Run unit and integration tests with:
