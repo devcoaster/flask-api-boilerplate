@@ -10,5 +10,4 @@ from app.utilities import AppConfig
 raw_config = dict(dotenv_values(".env"))
 app_config = AppConfig(**raw_config)
 
-app = create_app()
-app.config.from_object(app_config)
+app = create_app(app_config)
