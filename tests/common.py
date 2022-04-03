@@ -22,3 +22,15 @@ class IntegrationBaseTest(TestCase):
         app_config = AppConfig(**config)
         self.app = create_app(app_config)
         self.test_client = self.app.test_client()
+
+
+class UnitBaseTest(TestCase):
+    """
+    Common logic for unit tests.
+    """
+
+    def setUp(self) -> None:
+        """
+        Common.
+        """
+        super().setUp()
