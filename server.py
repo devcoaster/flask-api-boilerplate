@@ -10,5 +10,3 @@ raw_config = load_raw_config()
 app_config = AppConfig(**raw_config)
 
 app = create_app(app_config)
-
-app.run()

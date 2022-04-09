@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: gunicorn server:app --bind 0.0.0.0:8000
+  web: gunicorn server:app --bind 0.0.0.0:$PORT
